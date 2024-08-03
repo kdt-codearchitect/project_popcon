@@ -1,101 +1,98 @@
 package com.store.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.stereotype.Service;
-
 import com.store.dto.CartDTO;
-import com.store.dto.SkuDTO;
-import com.store.entity.Cart;
+import com.store.entity.CartEntity;
+import com.store.entity.CartItemEntity;
 import com.store.entity.Customer;
 import com.store.entity.Sku;
 import com.store.mapper.CartMapper;
-import com.store.mapper.SkuMapper;
+import com.store.repository.CartItemRepository;
 import com.store.repository.CartRepository;
 import com.store.repository.CustomerRepository;
 import com.store.repository.SkuRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
-public class CartServiceImpl implements CartService{
+@AllArgsConstructor
+public class CartServiceImpl implements CartService {
 
-	@Autowired
-	CartMapper cartMapper;
-	
-	  @Autowired
-	    private CartRepository cartRepository;
+	private final CartMapper cartMapper;
+	private final CartRepository cartRepository;
+	private final CustomerRepository customerRepository;
+	private final SkuRepository skuRepository;
 
-	    @Autowired
-	    private CustomerRepository customerRepository;
+	private final CartItemRepository cartItemRepository;
 
-	    @Autowired
-	    private SkuRepository skuRepository;
+	@Override
+	public CartDTO findById(Integer id) {
+		// onetomany, manytoone 관계보다는, 로직에서 따로 CRUD 하여 조합하여 처리하는 방식으로 현업에서 더 사용.
+		// 이유는, 성능 이슈 (JPA N+1 문제)가 발생할 수 있기 때문입니다.
+		CartEntity cartEntity = cartRepository.findById(id)
+			.orElseThrow(() -> new IllegalArgumentException("Invalid cart ID: " + id));
+		List<CartItemEntity> cartItemEntities = cartItemRepository.findByCartIdx(id);
 
-	    @Override
-	    public List<CartDTO> findAll() {
-	        List<CartDTO> carts = cartMapper.findAll();
-	        if (carts == null) {
-	            throw new NullPointerException("Cart list is null");
-	        }
-	        return carts;
-	    }
+		// 이제부터는, 프리젠테이션 레이어에서 사용할 DTO로 변환하는 작업을 해야 합니다.
+		return CartDTO.of(cartEntity, cartItemEntities);
+	}
 
-	    
-	    @Override
-	    public Cart addToCart(CartDTO cartDto) {
-	        Cart cart = convertToEntity(cartDto);
-	        return cartRepository.save(cart);
-	    }
+	@Override
+	public List<CartDTO> findAll() {
+		List<CartDTO> carts = cartMapper.findAll();
+		if (carts == null) {
+			throw new NullPointerException("Cart list is null");
+		}
+		return carts;
+	}
 
-	    @Override
-	    public Cart updateCart(CartDTO cartDto) {
-	        Cart existingCart = cartRepository.findById(cartDto.getCartIdx())
-	                .orElseThrow(() -> new IllegalArgumentException("Invalid cart ID: " + cartDto.getCartIdx()));
 
-	        existingCart.setSkuValue(cartDto.getSkuValue());
+	@Override
+	public CartEntity addToCart(CartDTO cartDto) {
+		CartEntity cartEntity = convertToEntity(cartDto);
+		return cartRepository.save(cartEntity);
+	}
 
-	        Customer customer = customerRepository.findById(cartDto.getCustomerIdx())
-	                .orElseThrow(() -> new IllegalArgumentException("Invalid customer ID: " + cartDto.getCustomerIdx()));
-	        Sku sku = skuRepository.findById(cartDto.getSkuIdx())
-	                .orElseThrow(() -> new IllegalArgumentException("Invalid SKU ID: " + cartDto.getSkuIdx()));
+	@Override
+	public CartEntity updateCart(CartDTO cartDto) {
+		CartEntity existingCartEntity = cartRepository.findById(cartDto.getCartIdx())
+			.orElseThrow(() -> new IllegalArgumentException("Invalid cart ID: " + cartDto.getCartIdx()));
 
-	        existingCart.setCustomer(customer);
-	        existingCart.setSku(sku);
+		existingCartEntity.setSkuValue(cartDto.getSkuValue());
 
-	        return cartRepository.save(existingCart);
-	    }
+		Customer customer = customerRepository.findById(cartDto.getCustomerIdx())
+			.orElseThrow(() -> new IllegalArgumentException("Invalid customer ID: " + cartDto.getCustomerIdx()));
+		Sku sku = skuRepository.findById(cartDto.getSkuIdx())
+			.orElseThrow(() -> new IllegalArgumentException("Invalid SKU ID: " + cartDto.getSkuIdx()));
 
-	    @Override
-	    public void deleteFromCart(int cartIdx) {
-	        cartRepository.deleteById(cartIdx);
-	    }
+		existingCartEntity.setCustomer(customer);
+		existingCartEntity.setSku(sku);
 
-	    private Cart convertToEntity(CartDTO cartDto) {
-	        Cart cart = new Cart();
+		return cartRepository.save(existingCartEntity);
+	}
 
-	        Customer customer = customerRepository.findById(cartDto.getCustomerIdx())
-	                .orElseThrow(() -> new IllegalArgumentException("Invalid customer ID: " + cartDto.getCustomerIdx()));
-	        Sku sku = skuRepository.findById(cartDto.getSkuIdx())
-	                .orElseThrow(() -> new IllegalArgumentException("Invalid SKU ID: " + cartDto.getSkuIdx()));
+	@Override
+	public void deleteFromCart(int cartIdx) {
+		cartRepository.deleteById(cartIdx);
+	}
 
-	        cart.setCustomer(customer);
-	        cart.setSku(sku);
-	        cart.setSkuValue(cartDto.getSkuValue());
+	private CartEntity convertToEntity(CartDTO cartDto) {
+		CartEntity cartEntity = new CartEntity();
 
-	        return cart;
-	    }
+		Customer customer = customerRepository.findById(cartDto.getCustomerIdx())
+			.orElseThrow(() -> new IllegalArgumentException("Invalid customer ID: " + cartDto.getCustomerIdx()));
+		Sku sku = skuRepository.findById(cartDto.getSkuIdx())
+			.orElseThrow(() -> new IllegalArgumentException("Invalid SKU ID: " + cartDto.getSkuIdx()));
 
-		
+		cartEntity.setCustomer(customer);
+		cartEntity.setSku(sku);
+		cartEntity.setSkuValue(cartDto.getSkuValue());
+
+		return cartEntity;
+	}
+
+
 }
 	
 
