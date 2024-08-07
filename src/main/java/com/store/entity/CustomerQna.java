@@ -46,6 +46,7 @@ public class CustomerQna {
 	@Column(nullable=false, name="qna_text")
 	String qnaText;
 	
+<<<<<<< Upstream, based on Project_Popcon/main
 	@Column(name="qna_picture")
 	String qnaPicture;
 	
@@ -53,16 +54,18 @@ public class CustomerQna {
 	String qnaImage;
 	
 
+=======
+>>>>>>> 120f1d8 POP-47-ask-001 : 자주묻는질문 FAQ 페이지 로직 완료, 주석 추가
 //	타임스탬프는 SQL로 저장
 	@Column(name="qna_date")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")	
 	LocalDateTime qnaDate;
 	
-	@PrePersist // 엔티티가 저장되기 전에 호출
-	private void updateTime() {
-        this.qnaDate = LocalDateTime.now(); // qnaDate에도 현재 시간 설정
-        System.out.println("qnaDate:" + qnaDate);
-    }
+//	@PrePersist // 엔티티가 저장되기 전에 호출
+//	private void updateTime() {
+//        this.qnaDate = LocalDateTime.now(); // qnaDate에도 현재 시간 설정
+//        System.out.println("qnaDate:" + qnaDate);
+//    }
 	
 	
 }

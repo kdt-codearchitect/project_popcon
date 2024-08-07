@@ -35,6 +35,7 @@ public class QnaController {
 //	문의 신청하기	
 	@PostMapping("/ask")
 	public ResponseEntity<?> PostMyQna(@Valid @RequestBody CustomerQna qna,
+<<<<<<< Upstream, based on Project_Popcon/main
 //									   @RequestParam String userid,
 												  BindingResult bindingResult) {
 		
@@ -47,6 +48,19 @@ public class QnaController {
 			return ResponseEntity.badRequest().body(errorMessage.toString());
 		};
 		
+=======
+												  BindingResult bindingResult) {
+		
+		// 유효성 검사 결과 확인
+		if(bindingResult.hasErrors()) {
+			// 오류가 있을 경우, 에러 메시지를 반환
+			StringBuilder errorMessage = new StringBuilder("문의내역 확인 : ");
+			bindingResult.getFieldErrors().forEach(error->
+				errorMessage.append(error.getDefaultMessage()).append(""));
+			return ResponseEntity.badRequest().body(errorMessage.toString());
+		};
+		//유효성 검사 통과시 DB 저장
+>>>>>>> 120f1d8 POP-47-ask-001 : 자주묻는질문 FAQ 페이지 로직 완료, 주석 추가
 		qna = qnaService.PostMyQna(qna);
 		log.info("postMyQna qnaDTO : {}", qna); 
 //		log.info("userid: "+userid);
