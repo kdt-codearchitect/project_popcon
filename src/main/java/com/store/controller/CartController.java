@@ -40,8 +40,12 @@ public class CartController {
     }
 
     @PostMapping("/sku/addToCart")
-    public ResponseEntity<CartItemEntity> addToCart(@RequestBody CartItemDTO cartItemDTO) {
+    public ResponseEntity<CartItemDTO> addToCart(@RequestBody CartItemDTO cartItemDTO) {
         CartItemEntity cartItemEntity = cartService.addToCart(cartItemDTO);
-        return ResponseEntity.ok(cartItemEntity);
+        return ResponseEntity.ok(CartItemDTO.of(cartItemEntity));
+    }
+    @GetMapping("/cart/items")
+    public ResponseEntity<List<CartItemDTO>> findAll() {
+        return ResponseEntity.ok(cartService.findAll());
     }
 }

@@ -13,4 +13,5 @@ public interface CartService {
     void deleteCart(int cartIdx);
     List<CartDTO> getCartsByCustomerIdx(int customerIdx);
     CartItemEntity addToCart(CartItemDTO cartItemDTO);
+    List<CartItemDTO> findAll();
     }

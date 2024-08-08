@@ -115,4 +115,8 @@ public class CartServiceImpl implements CartService {
             return cartItemRepository.save(cartItemEntity);
         }
     }
+    @Override
+    public List<CartItemDTO> findAll() {
+        return cartMapper.findAll();
+    }
 }
