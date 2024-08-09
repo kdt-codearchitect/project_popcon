@@ -58,16 +58,20 @@ public class CartServiceImpl implements CartService {
         CartItemEntity cartItemEntity = cartItemRepository.findById(cartItemIdx)
                 .orElseThrow(() -> new RuntimeException("CartItem not found"));
 
+
         cartItemEntity.setSkuValue(skuValue);
         cartItemEntity = cartItemRepository.save(cartItemEntity);
 
         return CartItemDTO.of(cartItemEntity);
+
     }
 
     @Override
     @Transactional
+
     public void deleteCartItem(int cartItemIdx) {
         cartItemRepository.deleteById(cartItemIdx);
+
     }
 
     @Override
@@ -99,9 +103,11 @@ public class CartServiceImpl implements CartService {
             cartItemEntity.setSkuValue(1); // Set initial count to 1
             return cartItemRepository.save(cartItemEntity);
         }
+
     }
     @Override
     public List<CartItemDTO> findAll() {
         return cartMapper.findAll();
+
     }
 }
