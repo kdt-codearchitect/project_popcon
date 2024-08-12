@@ -3,6 +3,7 @@ package com.store.controller;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
@@ -68,6 +69,12 @@ public class CustomerController {
       Map<String, Boolean> response = new HashMap<>();
       response.put("isUnique", isUnique);
       return ResponseEntity.ok(response);
+    }
+    @GetMapping("/customer-list")
+    public ResponseEntity<List<Customer>> customerList() {
+    	
+    
+    	return ResponseEntity.ok(memService.findAll());
     }
     
 }

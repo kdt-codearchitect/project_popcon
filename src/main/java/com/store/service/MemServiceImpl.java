@@ -23,6 +23,9 @@ import lombok.AllArgsConstructor;
 public class MemServiceImpl implements MemService {
 
 	  private final CustomerRepository customerRepository;
+	  
+	  
+	  
 
 	  @Override
 	  public CustomerDTO findById(int customerIdx) {
@@ -45,6 +48,16 @@ public class MemServiceImpl implements MemService {
 			
 			return customerRepository.findByCustomerId(id);
 		}
+
+		@Override
+		public List<Customer> findAll() {
+			
+;			return customerRepository.findAll();
+		}
+
+
+		
+		
 
 		
 

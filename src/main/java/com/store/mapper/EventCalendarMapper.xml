@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.store.mapper.EventCalendarMapper">
+
+ 	<resultMap id="xxx" type="PromotionDTO">
+  		<id 	property="promotionIdx" column="promotion_idx"/>
+  		<result property="promotionType"   column="promotion_type"/>
+  		<result property="promotionStart"   column="promotion_start"/>
+  		<result property="promotionEnd"   column="promotion_end"/>
+  		<result property="skuIdx"   column="sku_idx"/>
+  	</resultMap>
+ <select id="findAll"  resultMap="xxx">
+        SELECT * FROM promotion
+    </select>
+    
+  
+   
+</mapper>
+
+
