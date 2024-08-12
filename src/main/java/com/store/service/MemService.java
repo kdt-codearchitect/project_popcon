@@ -15,8 +15,10 @@ import com.store.repository.CustomerRepository;
 @Service
 public interface MemService {
 	 Customer registerMem(Customer mem);
+	 public CustomerDTO registerCustomer(CustomerDTO customerDTO);
 	 CustomerDTO findById(@Param("customerIdx") int customerIdx);
 	 Customer findByUserID(String id);
 
+	 
     }
 
