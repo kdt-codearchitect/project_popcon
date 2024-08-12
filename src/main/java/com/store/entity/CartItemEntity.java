@@ -1,11 +1,20 @@
-
 package com.store.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import lombok.*;
+import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -13,19 +22,20 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Entity
+@Table(name = "cart_item")
 public class CartItemEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false, name = "cart_item_idx")
-	private int cartItemIdx;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int cartItemIdx;
 
-	@Column(nullable = false, name = "cart_idx")
-	private int cartIdx;
+    @ManyToOne
+    @JoinColumn(name = "cart_idx", nullable = false)
+    @JsonBackReference
+    private CartEntity cart;
 
-	@ManyToOne
-	@JoinColumn(name = "sku_idx", nullable = false)
-	private Sku sku;
+    @Column(name = "sku_idx")
+    private int skuIdx;
 
-	@Column(name = "sku_value", nullable = false)
-	private int skuValue;
+    private int skuValue;
+	    
 }
