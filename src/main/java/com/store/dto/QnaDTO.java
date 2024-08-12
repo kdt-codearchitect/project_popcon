@@ -31,6 +31,9 @@ public class QnaDTO {
 	String qnaDate;
 	String qnaPicture;
 	String qnaImage;
+<<<<<<< Upstream, based on Project_Popcon/main
 	
+=======
+>>>>>>> 200aee9 fix/문의내역 조회 : QnaDTO 버그 수정
 	
 }

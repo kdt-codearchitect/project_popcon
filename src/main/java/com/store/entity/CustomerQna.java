@@ -61,6 +61,7 @@ public class CustomerQna {
 =======
 =======
 //	타임스탬프는 SQL로 저장
+<<<<<<< Upstream, based on Project_Popcon/main
 >>>>>>> 032724d CustomerQna (JPA) - 컬럼 항목 수정
 	@Column(name="qna_picture")
 	String qnaPicture;
@@ -73,6 +74,8 @@ public class CustomerQna {
 =======
 >>>>>>> 032724d CustomerQna (JPA) - 컬럼 항목 수정
 //	타임스탬프는 SQL로 저장
+=======
+>>>>>>> 200aee9 fix/문의내역 조회 : QnaDTO 버그 수정
 	@Column(name="qna_date")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")	
 	LocalDateTime qnaDate;
