@@ -47,6 +47,7 @@ public class CustomerQna {
 	String qnaText;
 	
 <<<<<<< Upstream, based on Project_Popcon/main
+<<<<<<< Upstream, based on Project_Popcon/main
 	@Column(name="qna_picture")
 	String qnaPicture;
 	
@@ -56,6 +57,14 @@ public class CustomerQna {
 
 =======
 >>>>>>> 120f1d8 POP-47-ask-001 : 자주묻는질문 FAQ 페이지 로직 완료, 주석 추가
+=======
+	@Column(name="qna_picture")
+	String qnaPicture;
+	
+	@Column(name="qna_image")
+	String qnaImage;
+	
+>>>>>>> 27e8766 문의내용 등록 기능 추가 이미지 저장 기능 추가
 //	타임스탬프는 SQL로 저장
 	@Column(name="qna_date")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")	
