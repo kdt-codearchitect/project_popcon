@@ -38,7 +38,6 @@ import org.springframework.http.ResponseEntity;
 public class WishController {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
-	
 	WishService wishService;
     public WishController(WishService wishService) {
         this.wishService = wishService;
@@ -46,16 +45,13 @@ public class WishController {
     @GetMapping("/Wish")
     public ResponseEntity<List<WishDTO>> findAll() {
         List<WishDTO> allWishes = wishService.findAll();
-        return ResponseEntity.ok(allWishes);
-        
+        return ResponseEntity.ok(allWishes);     
     }
 	@PostMapping("/Wish/add")
     public ResponseEntity<Wish> addToWish(@RequestBody WishDTO wishDto) {
         Wish newWishItem = wishService.addToWish(wishDto);
         return ResponseEntity.ok(newWishItem);
-    }
-
-  
+    }  
     @DeleteMapping("/Wish/delete/{wishIdx}")
     public ResponseEntity<Void> deleteFromWish(@PathVariable int wishIdx) {
         wishService.deleteFromWish(wishIdx);
