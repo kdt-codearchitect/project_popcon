@@ -45,6 +45,7 @@ public class CheckOutController {
 	    }
 	
 		//유저 정보 불러오기
+
 	    @GetMapping("/findCustomer/{customerIdx}")
 	    public List<CheckOutDTO> findCustomer(@PathVariable int customerIdx) {
 	        return checkOutService.findCustomer(customerIdx);
@@ -54,6 +55,7 @@ public class CheckOutController {
 	    @GetMapping("/findCart/{customerIdx}")
 	    public List<CheckOutDTO> findCart(@PathVariable int customerIdx) {
 	    	List<CheckOutDTO>xx=checkOutService.findCart(customerIdx);
+
 	    	System.out.println(xx);
 	        return xx;
 	    }
