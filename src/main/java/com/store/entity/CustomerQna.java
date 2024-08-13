@@ -49,6 +49,9 @@ public class CustomerQna {
 <<<<<<< Upstream, based on Project_Popcon/main
 <<<<<<< Upstream, based on Project_Popcon/main
 <<<<<<< Upstream, based on Project_Popcon/main
+<<<<<<< Upstream, based on Project_Popcon/main
+=======
+>>>>>>> f98704b fix/문의내역 타임스탬프 버그 수정
 	@Column(name="qna_picture")
 	String qnaPicture;
 	
@@ -80,11 +83,11 @@ public class CustomerQna {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")	
 	LocalDateTime qnaDate;
 	
-//	@PrePersist // 엔티티가 저장되기 전에 호출
-//	private void updateTime() {
-//        this.qnaDate = LocalDateTime.now(); // qnaDate에도 현재 시간 설정
-//        System.out.println("qnaDate:" + qnaDate);
-//    }
+	@PrePersist // 엔티티가 저장되기 전에 호출
+	private void updateTime() {
+        this.qnaDate = LocalDateTime.now(); // qnaDate에도 현재 시간 설정
+        System.out.println("qnaDate:" + qnaDate);
+    }
 	
 	
 }

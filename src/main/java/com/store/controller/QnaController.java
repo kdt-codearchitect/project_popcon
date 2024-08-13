@@ -36,6 +36,7 @@ public class QnaController {
 	@PostMapping("/ask")
 	public ResponseEntity<?> PostMyQna(@Valid @RequestBody CustomerQna qna,
 <<<<<<< Upstream, based on Project_Popcon/main
+<<<<<<< Upstream, based on Project_Popcon/main
 //									   @RequestParam String userid,
 												  BindingResult bindingResult) {
 		
@@ -49,6 +50,9 @@ public class QnaController {
 		};
 		
 =======
+=======
+//									   @RequestParam String userid,
+>>>>>>> f98704b fix/문의내역 타임스탬프 버그 수정
 												  BindingResult bindingResult) {
 		
 		// 유효성 검사 결과 확인
@@ -59,8 +63,12 @@ public class QnaController {
 				errorMessage.append(error.getDefaultMessage()).append(""));
 			return ResponseEntity.badRequest().body(errorMessage.toString());
 		};
+<<<<<<< Upstream, based on Project_Popcon/main
 		//유효성 검사 통과시 DB 저장
 >>>>>>> 120f1d8 POP-47-ask-001 : 자주묻는질문 FAQ 페이지 로직 완료, 주석 추가
+=======
+		
+>>>>>>> f98704b fix/문의내역 타임스탬프 버그 수정
 		qna = qnaService.PostMyQna(qna);
 		log.info("postMyQna qnaDTO : {}", qna); 
 //		log.info("userid: "+userid);
