@@ -30,11 +30,18 @@ public class QnaDTO {
 	String qnaText;
 	String qnaDate;
 	String qnaPicture;
+<<<<<<< Upstream, based on Project_Popcon/main
 	String qnaImage;
 <<<<<<< Upstream, based on Project_Popcon/main
 	
 =======
 >>>>>>> 200aee9 fix/문의내역 조회 : QnaDTO 버그 수정
+=======
+	String qnaImage;	
+	String qnaState;
+	String qnaClearDate;
+	String qnaDel;
+>>>>>>> b840904 POP-48 문의하기 이미지 저장 버그 수정
 	
 	
 }

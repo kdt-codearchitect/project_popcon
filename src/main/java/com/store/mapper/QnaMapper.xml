@@ -12,8 +12,12 @@
   		<result property="qnaText"   column="qna_text"/>
   		<result property="qnaPicture"   column="qna_picture"/>
   		<result property="qnaImage"   column="qna_image"/>
+  		<result property="qnaState"   column="qna_state"/>
+  		<result property="qnaClearDate"   column="qna_clear_date"/>
   		<result property="qnaDate"   column="qna_date"/>
+  		<result property="qnaDel"   column="qna_del"/>
   	</resultMap>
+  	
   	<select id="findMyQna" resultMap="S2C">
  			select qna_idx,
  				   faqtype_idx,
@@ -22,8 +26,12 @@
  				   qna_text,
  				   qna_picture,
  				   qna_image,
- 				   qna_date
+ 				   qna_state,
+ 				   qna_clear_date,
+ 				   qna_date,
+ 				   qna_del
  			  from CUSTOMER_QNA
+ 			 where qna_del=false
  			 
   	</select>
   	<insert id="postMyQna" parameterType="QnaDTO">

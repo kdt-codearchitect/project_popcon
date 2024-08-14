@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -58,6 +56,8 @@ public class CustomerQna {
 	@Column(name="qna_image")
 	String qnaImage;
 	
+	@Column(name="qna_del")
+	Boolean qnaDel;
 
 =======
 >>>>>>> 120f1d8 POP-47-ask-001 : 자주묻는질문 FAQ 페이지 로직 완료, 주석 추가
