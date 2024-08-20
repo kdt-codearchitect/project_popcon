@@ -52,7 +52,7 @@ public class CustomerQna {
 	
 	@Column(name="qna_del")
 	Boolean qnaDel;
-
+	
 //	타임스탬프는 SQL로 저장
 	@Column(name="qna_date")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")	
