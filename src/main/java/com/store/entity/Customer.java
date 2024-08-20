@@ -11,12 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-<<<<<<< Upstream, based on Project_Popcon/main
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-=======
->>>>>>> f98704b fix/문의내역 타임스탬프 버그 수정
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

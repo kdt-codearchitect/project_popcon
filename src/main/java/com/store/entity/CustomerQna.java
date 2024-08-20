@@ -44,12 +44,6 @@ public class CustomerQna {
 	@Column(nullable=false, name="qna_text")
 	String qnaText;
 	
-<<<<<<< Upstream, based on Project_Popcon/main
-<<<<<<< Upstream, based on Project_Popcon/main
-<<<<<<< Upstream, based on Project_Popcon/main
-<<<<<<< Upstream, based on Project_Popcon/main
-=======
->>>>>>> f98704b fix/문의내역 타임스탬프 버그 수정
 	@Column(name="qna_picture")
 	String qnaPicture;
 	
@@ -58,33 +52,11 @@ public class CustomerQna {
 	
 	@Column(name="qna_del")
 	Boolean qnaDel;
-<<<<<<< Upstream, based on Project_Popcon/main
 
-=======
->>>>>>> 120f1d8 POP-47-ask-001 : 자주묻는질문 FAQ 페이지 로직 완료, 주석 추가
-=======
-=======
 //	타임스탬프는 SQL로 저장
-<<<<<<< Upstream, based on Project_Popcon/main
->>>>>>> 032724d CustomerQna (JPA) - 컬럼 항목 수정
-	@Column(name="qna_picture")
-	String qnaPicture;
-	
-	@Column(name="qna_image")
-	String qnaImage;
-	
-<<<<<<< Upstream, based on Project_Popcon/main
->>>>>>> 27e8766 문의내용 등록 기능 추가 이미지 저장 기능 추가
-=======
->>>>>>> 032724d CustomerQna (JPA) - 컬럼 항목 수정
-//	타임스탬프는 SQL로 저장
-=======
->>>>>>> 200aee9 fix/문의내역 조회 : QnaDTO 버그 수정
 	@Column(name="qna_date")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")	
 	LocalDateTime qnaDate;
-=======
->>>>>>> a7ca03e feature/POP-29 문의내역 회원 연결
 	
 	@Column(name="qna_ans")
 	String qnaAns;
