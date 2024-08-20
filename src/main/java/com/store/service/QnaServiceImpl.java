@@ -29,7 +29,7 @@ public class QnaServiceImpl implements QnaService {
     // 문의내용 Update
 	@Override
     public CustomerQna EditMyQna(int CustomerIdx, CustomerQna qna) {
-        qna.setCustomerIdx(CustomerIdx);;
+        qna.setCustomerIdx(CustomerIdx);
         return qnaRepository.save(qna);
     }
     
@@ -42,8 +42,8 @@ public class QnaServiceImpl implements QnaService {
 	
 	// 문의내역 조회
 	@Override
-	public List<QnaDTO> findMyQna() {
-		return qnaMapper.findMyQna();
+	public List<QnaDTO> findMyQna(int CustomerIdx) {
+		return qnaMapper.findMyQna(CustomerIdx);
 	}
 
 }

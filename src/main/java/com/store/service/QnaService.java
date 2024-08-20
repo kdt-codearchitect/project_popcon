@@ -14,5 +14,5 @@ public interface QnaService {
 	CustomerQna DeleteMyQna(int CustomerIdx, CustomerQna qna);
 
 	// 문의내역 조회
-	public List<QnaDTO> findMyQna();
+	public List<QnaDTO> findMyQna(int CustomerIdx);
 }

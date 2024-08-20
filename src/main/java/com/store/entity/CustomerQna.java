@@ -40,7 +40,7 @@ public class CustomerQna {
 	
 	@Column(nullable=false, name="qna_title")
 	String qnaTitle;
-	
+																																																																																																																																																																																																																																																																																																																																																																																																																																										
 	@Column(nullable=false, name="qna_text")
 	String qnaText;
 	
@@ -58,6 +58,7 @@ public class CustomerQna {
 	
 	@Column(name="qna_del")
 	Boolean qnaDel;
+<<<<<<< Upstream, based on Project_Popcon/main
 
 =======
 >>>>>>> 120f1d8 POP-47-ask-001 : 자주묻는질문 FAQ 페이지 로직 완료, 주석 추가
@@ -82,12 +83,22 @@ public class CustomerQna {
 	@Column(name="qna_date")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")	
 	LocalDateTime qnaDate;
+=======
+>>>>>>> a7ca03e feature/POP-29 문의내역 회원 연결
 	
-	@PrePersist // 엔티티가 저장되기 전에 호출
-	private void updateTime() {
-        this.qnaDate = LocalDateTime.now(); // qnaDate에도 현재 시간 설정
-        System.out.println("qnaDate:" + qnaDate);
-    }
+	@Column(name="qna_ans")
+	String qnaAns;
+	
+////	타임스탬프는 SQL로 저장
+//	@Column(name="qna_date")
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")	
+//	LocalDateTime qnaDate;
+//	
+//	@PrePersist // 엔티티가 저장되기 전에 호출
+//	private void updateTime() {
+//        this.qnaDate = LocalDateTime.now(); // qnaDate에도 현재 시간 설정
+//        System.out.println("qnaDate:" + qnaDate);
+//    }
 	
 	
 }

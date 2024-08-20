@@ -16,6 +16,7 @@
   		<result property="qnaClearDate"   column="qna_clear_date"/>
   		<result property="qnaDate"   column="qna_date"/>
   		<result property="qnaDel"   column="qna_del"/>
+  		<result property="qnaAns"   column="qna_ans"/>
   	</resultMap>
   	
   	<select id="findMyQna" resultMap="S2C">
@@ -29,9 +30,11 @@
  				   qna_state,
  				   qna_clear_date,
  				   qna_date,
- 				   qna_del
+ 				   qna_del,
+ 				   qna_ans
  			  from CUSTOMER_QNA
  			 where qna_del=false
+ 			   and customer_idx=#{customer_idx}
  			 
   	</select>
   	<insert id="postMyQna" parameterType="QnaDTO">
