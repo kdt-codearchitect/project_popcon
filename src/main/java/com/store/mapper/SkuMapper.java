@@ -18,7 +18,7 @@ public interface SkuMapper {
 //	int insertMember(Member member);
 //	Member registerNewMember(@Valid Member member);
 //	@Select("SELECT * FROM member")
-    List<SkuDTO> findAll(int limit);
-    List<SkuDTO> findByType(int skutypeIdx, int limit);
+    List<SkuDTO> findAll(int limit, String wishIdx);
+    List<SkuDTO> findByType(int skutypeIdx, int limit, String wishIdx);
 }
 

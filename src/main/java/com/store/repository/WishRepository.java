@@ -11,6 +11,5 @@ import com.store.entity.Wish;
 
 @Repository
 public interface WishRepository extends JpaRepository<Wish, Integer> {
-	
-	
+
 }
