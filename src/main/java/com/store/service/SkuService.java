@@ -12,6 +12,6 @@ import org.apache.ibatis.annotations.Param;
 import com.store.dto.SkuDTO;
 
 public interface SkuService {
-	List<SkuDTO> findAll(int limit);
-	List<SkuDTO> findByType(int skutypeIdx, int limit);
+	List<SkuDTO> findAll(int limit, String wishIdx);
+	List<SkuDTO> findByType(int skutypeIdx, int limit, String wishIdx);
 }

@@ -24,20 +24,19 @@ public class SkuServiceImpl implements SkuService {
 
 	SkuMapper skuMapper;
 
-	@Autowired
 	public SkuServiceImpl(SkuMapper skuMapper) {
 		this.skuMapper = skuMapper;
 	}
 
 	@Override
-	public List<SkuDTO> findAll(int limit) {
-		return skuMapper.findAll(limit);
+	public List<SkuDTO> findAll(int limit, String wishIdx) {
+		return skuMapper.findAll(limit, wishIdx);
 	}
 
 	@Override
-	public List<SkuDTO> findByType(int skutypeIdx, int limit) {
+	public List<SkuDTO> findByType(int skutypeIdx, int limit, String wishIdx) {
 		// TODO Auto-generated method stub
-		return skuMapper.findByType(skutypeIdx, limit);
+		return skuMapper.findByType(skutypeIdx, limit, wishIdx);
 	}
 
 }

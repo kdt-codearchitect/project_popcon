@@ -66,7 +66,7 @@ public class WishController {
     public ResponseEntity<List<WishDTO>>getWishesByCustomerIdx(@PathVariable int customerIdx){
     	return ResponseEntity.ok(wishService.getWishesByCustomerIdx(customerIdx));
     }
-	@PostMapping("/wish/add")
+	@PostMapping("/wish/add/{wishIdx}")
     public ResponseEntity<WishItemDTO> addToWish(@RequestBody WishItemDTO wishItemDto) {
         WishItemEntity wishItemEntity = wishService.addToWish(wishItemDto);
         return ResponseEntity.ok(WishItemDTO.of(wishItemEntity));
@@ -78,7 +78,6 @@ public class WishController {
     @DeleteMapping("/wish/delete/{wishItemIdx}")
     public ResponseEntity<Void> deleteWishItem(@PathVariable int wishItemIdx) {
         wishService.deleteWishItem(wishItemIdx);
-
         return ResponseEntity.noContent().build();
     }
     @PostMapping("/wish/moveToCart")

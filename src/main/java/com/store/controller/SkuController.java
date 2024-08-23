@@ -54,17 +54,17 @@ public class SkuController {
 		this.skuService = skuService;
 	}
 
-	@GetMapping("/sku/{limit}")
-	public List<SkuDTO> listSku(@PathVariable int limit) {
-		List<SkuDTO> list = skuService.findAll(limit);
-		System.out.println(skuService.findAll(limit));
+	@GetMapping("/sku/{limit}/{wishIdx}")
+	public List<SkuDTO> listSku(@PathVariable int limit, @PathVariable String wishIdx) {
+		List<SkuDTO> list = skuService.findAll(limit, wishIdx);
+		System.out.println(skuService.findAll(limit, wishIdx));
 		return list;
 	}
 
-	@GetMapping("/sku/type/{skutypeIdx}/{limit}")
-	public List<SkuDTO> findByType(@PathVariable int skutypeIdx, @PathVariable int limit) {
-		List<SkuDTO> list = skuService.findByType(skutypeIdx, limit);
-		return skuService.findByType(skutypeIdx, limit);
+	@GetMapping("/sku/type/{skutypeIdx}/{limit}/{wishIdx}")
+	public List<SkuDTO> findByType(@PathVariable int skutypeIdx, @PathVariable int limit, @PathVariable String wishIdx) {
+		List<SkuDTO> list = skuService.findByType(skutypeIdx, limit, wishIdx);
+		return skuService.findByType(skutypeIdx, limit, wishIdx);
 	}
 
 	@PostMapping("/sku/addToCart")

@@ -6,7 +6,7 @@
 
 <mapper namespace="com.store.mapper.SkuMapper">
 
-	<select id="findAll" parameterType="int" resultType="Sku">
+	<select id="findAll" parameterType="map" resultType="Sku">
 		SELECT
 			s.sku_idx AS skuIdx,
 			s.skutype_idx AS skuTypeIdx,
@@ -20,12 +20,13 @@
 			sku_promotion AS p
 			ON s.sku_idx = p.sku_idx
 		LEFT OUTER JOIN 
-		    wish_item AS w 
+		    (SELECT sku_idx from wish_item where wish_idx = #{wishIdx}) AS w 
 		    ON s.sku_idx = w.sku_idx
-		limit #{limit}, 12
+		    order by w.sku_idx desc
+		LIMIT #{limit}, 12;
 	</select>
 
-	<select id="findByType" parameterType="int" resultType="Sku">
+	<select id="findByType" parameterType="map" resultType="Sku">
 	<![CDATA[
 		SELECT
 			s.sku_idx AS skuIdx,
@@ -40,12 +41,13 @@
 			sku_promotion AS p
 			ON s.sku_idx = p.sku_idx
 		LEFT OUTER JOIN 
-		    wish_item AS w 
+		    (SELECT sku_idx from wish_item where wish_idx = #{wishIdx}) AS w 
 		    ON s.sku_idx = w.sku_idx
 		WHERE
-			skutype_idx >= #{skutypeIdx}
-        AND skutype_idx < #{skutypeIdx} + 1000
-        limit #{limit}, 12
+			s.skutype_idx >= #{skutypeIdx}
+        AND s.skutype_idx < #{skutypeIdx} + 1000
+        order by w.sku_idx desc
+        LIMIT #{limit}, 12;
 	]]>
 	</select>
 

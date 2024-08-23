@@ -1,6 +1,5 @@
 package com.store.entity;
 
-
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -33,17 +32,18 @@ import lombok.ToString;
 @Entity
 @Table(name = "wish_item")
 public class WishItemEntity {
+	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "wish_item_idx")
-    private int wishItemIdx;
+	private int wishItemIdx;
 
-    @ManyToOne
-    @JoinColumn(name = "wish_idx",nullable = false)
-    @JsonBackReference
-    private Wish wish;
-    
-   @Column(name = "sku_idx")
-   private int skuIdx;
-   
+	@ManyToOne
+	@JoinColumn(name = "wish_idx", nullable = false)
+	@JsonBackReference
+	private Wish wish;
+
+	@Column(name = "sku_idx")
+	private int skuIdx;
+
 }

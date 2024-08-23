@@ -26,20 +26,20 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WishItemDTO {
-	   private int wishItemIdx;
-	   private int wishIdx;
-	    private int skuIdx;
-	    private String skuName;
-	    private Integer skuCost;
-		
-	    public static WishItemDTO of(WishItemEntity itemEntity) {
-	        if (itemEntity == null) {
-	            return null;
-	        }
-	        WishItemDTO item = new WishItemDTO();
-	        item.setWishItemIdx(itemEntity.getWishItemIdx());
-	        item.setWishIdx(itemEntity.getWish().getWishIdx());  // 추가된 필드 설정
-	        item.setSkuIdx(itemEntity.getSkuIdx());
-	        return item;
-	    }
+	private int wishItemIdx;
+	private int wishIdx;
+	private int skuIdx;
+	private String skuName;
+	private Integer skuCost;
+
+	public static WishItemDTO of(WishItemEntity itemEntity) {
+		if (itemEntity == null) {
+			return null;
+		}
+		WishItemDTO item = new WishItemDTO();
+		item.setWishItemIdx(itemEntity.getWishItemIdx());
+		item.setWishIdx(itemEntity.getWish().getWishIdx()); // 추가된 필드 설정
+		item.setSkuIdx(itemEntity.getSkuIdx());
+		return item;
+	}
 }
