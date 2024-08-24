@@ -53,8 +53,10 @@ public class Customer {
 	    private String customerEmail;
 	    @Column(name = "customer_rate")
 	    private String customerRate;
+//	    @Column(name = "customer_role")
+//	    private String customerRole;
 	    @Column(name = "customer_role")
-	    private String customerRole;
+	    private Boolean customerRole;
 	    @OneToOne(mappedBy = "customer")
 	    @JsonManagedReference
 	    private CartEntity cart;

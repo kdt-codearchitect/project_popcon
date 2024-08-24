@@ -23,7 +23,7 @@ public class QnaDTO {
 	private int qnaIdx;
 	private int faqtypeIdx;
 	private int customerIdx;
-	
+	String faqType;
 	@NotEmpty(message="제목을 입력하세요.")
 	String qnaTitle;
 	@NotEmpty(message="내용을 입력하세요.")

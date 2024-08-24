@@ -42,7 +42,8 @@ public class CustomerDTO {
 	    private String customerAddMore;
 	    private String customerEmail;
 	    private String customerRate;
-	    private String customerRole;
+//	    private String customerRole;
+	    private Boolean customerRole;
 
 	    public CustomerDTO(Customer customer) {
 	        this.customerIdx = customer.getCustomerIdx();
