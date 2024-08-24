@@ -67,7 +67,7 @@
     <groupId>org.opensearch.client</groupId>
     <artifactId>opensearch-rest-high-level-client</artifactId>
     <version>1.0.0</version>
-</dependency>
+    </dependency>
 
 		<dependency>
 		    <groupId>org.mybatis.spring.boot</groupId>
