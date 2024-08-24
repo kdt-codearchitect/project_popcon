@@ -20,10 +20,11 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderItemMapper orderItemMapper;
 
+    // 주문 생성
     @Transactional
     @Override
     public OrderDTO placeOrder(OrderDTO orderDTO, List<OrderItemDTO> orderItems) {
-        // 주문 생성
+        
     	System.out.println("카트에서 가져온 skuIdx:" + orderItems);
     	System.out.println("카트에서 가져온 skuIdx:" + orderDTO);
         orderMapper.insertOrder(orderDTO);
@@ -37,14 +38,23 @@ public class OrderServiceImpl implements OrderService {
 
         return orderDTO;
     }
-
+    
+    //주문 검색
     @Override
     public OrderDTO getOrderById(int orderIdx) {
         return orderMapper.selectOrderById(orderIdx);
     }
-
+    
+    //유저 주문내역 자세히 보기
     @Override
     public List<OrderItemDTO> getOrderItemsByOrderId(int orderIdx) {
         return orderItemMapper.selectOrderItemsByOrderId(orderIdx);
     }
+    
+    //유저 주문내역 전체 보기
+	@Override
+	public List<OrderDTO> getOrderByCustomerId(int customerIdx) {
+		
+		return orderMapper.findOrderByCustomerId(customerIdx);
+	}
 }
