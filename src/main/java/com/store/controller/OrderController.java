@@ -16,6 +16,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    //주문내역 저장
     @PostMapping("/place")
     public OrderDTO placeOrder(@RequestBody OrderRequestDTO orderRequest) {
         OrderDTO orderDTO = orderRequest.getOrderDTO();
@@ -39,14 +40,20 @@ public class OrderController {
         return 1; // 예시로, 기본 배송 정보를 가진 delivery_idx
     }
 
-
+    //특정 주문내역 확인
     @GetMapping("/{orderIdx}")
     public OrderDTO getOrderById(@PathVariable int orderIdx) {
         return orderService.getOrderById(orderIdx);
     }
-
+    
+    //주문내역 자세히 보기
     @GetMapping("/{orderIdx}/items")
     public List<OrderItemDTO> getOrderItemsByOrderId(@PathVariable int orderIdx) {
         return orderService.getOrderItemsByOrderId(orderIdx);
+    }
+    //유저 주문내역 전체 보기
+    @GetMapping("/user/{customerIdx}")
+    public List<OrderDTO> getOrderHistoryByCustomerId(@PathVariable("customerIdx") int customerIdx) {
+        return orderService.getOrderByCustomerId(customerIdx);
     }
 }
