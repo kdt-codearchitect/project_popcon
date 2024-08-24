@@ -20,4 +20,5 @@ public class OrderItemDTO {
     private int skuIdx;
     private int orderItemQty;
     private int orderItemPrice;
-}
+    private String skuName;
+    }
