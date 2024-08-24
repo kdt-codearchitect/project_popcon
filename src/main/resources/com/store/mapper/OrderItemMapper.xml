@@ -9,9 +9,23 @@
         VALUES (#{orderIdx}, #{skuIdx}, #{orderItemQty}, #{orderItemPrice})
     </insert>
     
-    <!-- 주문 아이템 조회 -->
-    <select id="selectOrderItemsByOrderId" resultType="com.store.dto.OrderItemDTO">
-        SELECT * FROM order_item WHERE order_idx = #{orderIdx}
-    </select>
+ <!-- 주문 아이템 조회 -->
+<select id="selectOrderItemsByOrderId" resultType="com.store.dto.OrderItemDTO">
+    SELECT 
+        oi.order_item_idx,
+        oi.order_idx,
+        oi.sku_idx,
+        oi.order_item_qty,
+        oi.order_item_price,
+        s.sku_name AS skuName,
+        s.sku_img AS skuImg
+    FROM 
+        order_item oi
+    JOIN 
+        sku s ON oi.sku_idx = s.sku_idx
+    WHERE 
+        oi.order_idx = #{orderIdx}
+</select>
+
 
 </mapper>
