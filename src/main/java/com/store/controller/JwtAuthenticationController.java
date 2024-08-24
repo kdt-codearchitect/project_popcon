@@ -24,6 +24,8 @@ import com.store.security.JwtTokenResponse;
 import com.store.security.JwtTokenService;
 import com.store.service.AuthenticationService;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @RestController
 public class JwtAuthenticationController {
 
@@ -53,7 +55,12 @@ public class JwtAuthenticationController {
         if (customer != null && passwordEncoder.matches(jwtTokenRequest.get("password"), customer.getCustomerPw())) { // 일치하는 사용자와 비번이 일치하면
             List<GrantedAuthority> roles = new ArrayList<>();
             roles.add(new SimpleGrantedAuthority("USER")); // 권한 부여, 현재는 모든 사용자권한을 USER로 지정한다.
-         
+            
+            // 사용자가 관리자인 경우 ADMIN 권한 추가
+	        if (customer.getCustomerRole().equals(true)) {
+	        	roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+	        }
+        		
             authenticationToken = new UsernamePasswordAuthenticationToken(
                 new Customer(
                     customer.getCustomerIdx(),
@@ -75,8 +82,11 @@ public class JwtAuthenticationController {
             ); 
         }
         
+        log.info("authenticationToken: {}", authenticationToken);
+        log.info("customer: {}", customer);
+        
         String token = tokenService.generateToken(authenticationToken);
-        return ResponseEntity.ok(new JwtTokenResponse(token, customer.getCustomerIdx())); // idx값을 던짐
+        return ResponseEntity.ok(new JwtTokenResponse(token, customer.getCustomerIdx(), customer.getCustomerRole())); // idx, role값을 던짐
     }
 
     // 암호화 객체 생성

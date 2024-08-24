@@ -7,6 +7,7 @@
    	<resultMap id="S2C" type="QnaDTO">
   		<id		property="qnaIdx" column="qna_idx"/>
   		<result property="faqtypeIdx"   column="faqtype_idx"/>
+  		<result property="faqType"   column="faq_type"/>
   		<result property="customerIdx"   column="customer_idx"/>
   		<result property="qnaTitle"   column="qna_title"/>
   		<result property="qnaText"   column="qna_text"/>
@@ -22,6 +23,7 @@
   	<select id="findMyQna" resultMap="S2C">
 		  	select q.qna_idx,
  				   q.faqtype_idx,
+ 				   f.faq_type,
  				   c.customer_idx,
                    c.customer_id,
  				   q.qna_title,
@@ -34,11 +36,12 @@
                    m.qna_clear_date
 			  from CUSTOMER_QNA q
 	    right join customer c on c.customer_idx = q.customer_idx
-        left join manager_qna m on m.qna_idx = q.qna_idx
+         left join manager_qna m on m.qna_idx = q.qna_idx
+        right join faq_type f on f.faqtype_idx = q.faqtype_idx
  			 where qna_del=false
  			   and c.customer_idx=#{customer_idx}
- 			 
   	</select>
+  	
   	<insert id="postMyQna" parameterType="QnaDTO">
   		
 	  insert into CUSTOMER_QNA(

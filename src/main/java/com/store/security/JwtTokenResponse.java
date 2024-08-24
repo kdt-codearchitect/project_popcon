@@ -23,5 +23,5 @@ import lombok.ToString;
 public class JwtTokenResponse {
 	String token;
 	int customerIdx;
-
+	Boolean customerRole;
 }

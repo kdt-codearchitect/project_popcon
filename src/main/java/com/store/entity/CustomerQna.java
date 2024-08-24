@@ -1,11 +1,14 @@
 package com.store.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +22,7 @@ import lombok.ToString;
 @Builder
 @Getter
 @Setter
-@ToString
+@ToString(exclude="reply")
 @Entity
 public class CustomerQna {
 	
@@ -52,8 +55,9 @@ public class CustomerQna {
 	@Column(name="qna_del")
 	Boolean qnaDel;
 	
-//	@OneToOne(mappedBy="customerQna")
-//	ManagerQna reply;
+	@OneToOne(mappedBy="customerQna", cascade = CascadeType.ALL)
+	@JsonIgnore
+	ManagerQna reply;
 	
 ////	타임스탬프는 SQL로 저장
 //	@Column(name="qna_date")

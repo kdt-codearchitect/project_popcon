@@ -25,8 +25,7 @@ public class QnaController {
 
 	QnaService qnaService;
 	
-	public QnaController(QnaService qnaService
-			) {
+	public QnaController(QnaService qnaService) {
 		this.qnaService = qnaService;
 	}
 
@@ -54,7 +53,7 @@ public class QnaController {
 
 	
 //	문의 삭제하기
-	@PutMapping("/myinquiry{customerIdx}")
+	@PutMapping("/asknot/{customerIdx}")
 	public ResponseEntity<?> DeleteMyQna(@PathVariable int customerIdx, 
 										 @Valid @RequestBody CustomerQna qna,
 										 BindingResult bindingResult){
