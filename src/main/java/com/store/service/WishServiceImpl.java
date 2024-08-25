@@ -114,7 +114,7 @@ public class WishServiceImpl implements WishService {
         }
     }
 
-    @Override
+  	@Override
     public List<WishItemDTO> findAll() {
         return wishMapper.findAll();
     }
@@ -143,5 +143,10 @@ public class WishServiceImpl implements WishService {
         wishItemRepository.deleteByWishWishIdx(wishItemIdx);
     }
 
+    @Override
+    @Transactional
+  	public void deleteByWishIdxAndSkuIdx(int wishIdx, int skuIdx) {
+    	wishItemRepository.deleteByWishWishIdxAndSkuIdx(wishIdx, skuIdx);  		
+  	}
 	
 }

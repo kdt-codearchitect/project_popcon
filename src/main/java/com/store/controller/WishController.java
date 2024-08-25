@@ -89,5 +89,11 @@ public class WishController {
             return ResponseEntity.status(500).body("Error moving product to cart: " + e.getMessage());
         }
     }
+    
+    @DeleteMapping("/wish/delete/{wishIdx}/{skuIdx}")
+    public ResponseEntity<Void> deleteByWishIdxAndSkuIdx(@PathVariable int wishIdx, @PathVariable int skuIdx) {
+        wishService.deleteByWishIdxAndSkuIdx(wishIdx, skuIdx);
+        return ResponseEntity.noContent().build();
+    }
 
 }

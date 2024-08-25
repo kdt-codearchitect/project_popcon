@@ -5,54 +5,64 @@
 
 <mapper namespace="com.store.mapper.CheckOutMapper">
 	<!-- 장바구니에 담긴 물건을 조회하는 쿼리 -->
-	<select id="findCart" parameterType="int" resultType="CheckOutDTO">
+	<select id="findCart" parameterType="map"
+		resultType="CartItemDTO">
 		SELECT
-		sku.sku_name,
-		sku.sku_cost,
-		ci.sku_value,
-		(sku.sku_cost * ci.sku_value) AS sum_cost,
-		t.total_sum_cost
-		FROM
-		cart_item ci
-		JOIN
-		sku ON ci.sku_idx = sku.sku_idx
-		JOIN
-		cart ca ON ci.cart_idx = ca.cart_idx
-		JOIN (
-		SELECT
-		ca.customer_idx,
-		SUM(sku.sku_cost * ci.sku_value) AS total_sum_cost
-		FROM
-		cart_item ci
-		JOIN
-		sku ON ci.sku_idx = sku.sku_idx
-		JOIN
-		cart ca ON ci.cart_idx = ca.cart_idx
-		GROUP BY
-		ca.customer_idx
-		) t ON ca.customer_idx = t.customer_idx
+			ci.cart_item_idx AS cartItemIdx,
+			ci.cart_idx AS cartIdx,
+			ci.sku_idx AS skuIdx, -- skuIdx 추가
+			ci.sku_value AS skuValue,
+			s.sku_name AS skuName,
+			s.sku_cost AS skuCost,
+			ci.keep_cost AS keepCost,
+			ci.source AS source, -- Source 추가
+			sp.promotion_idx,
+		CASE
+			WHEN ci.keep_cost IS NULL THEN s.sku_cost
+			ELSE ci.keep_cost
+		END AS finalCost
+		FROM cart_item ci
+		LEFT JOIN sku s
+			ON ci.sku_idx = s.sku_idx
+		RIGHT OUTER JOIN sku_promotion sp
+			ON sp.sku_idx = s.sku_idx
+		WHERE ci.cart_idx IN (
+		SELECT cart_idx
+		FROM cart
 		WHERE
-		ca.customer_idx = #{customerIdx};
+		ca.customer_idx = #{customerIdx}
+		<if test="skuIdxList != null and skuIdxList.size() > 0">
+			AND ci.sku_idx IN
+			<foreach item="skuIdx" collection="skuIdxList" open="("
+				separator="," close=")">
+				#{skuIdx}
+			</foreach>
+		</if>
 	</select>
+
+
 	<!-- 결제하는 사람의 정보를 가져오는 쿼리 -->
-	<select id="findCustomer" parameterType="int" resultType="CheckOutDTO">
+	<select id="findCustomer" parameterType="int"
+		resultType="CheckOutDTO">
 
 		SELECT
-			ci.cart_item_idx,
-			c.customer_name,
-			c.customer_email,
-			c.customer_add,
-			c.customer_add_more,
-			c.customer_phone,
-			c.customer_idx
+		ci.cart_item_idx,
+		c.customer_name,
+		c.customer_email,
+		c.customer_add,
+		c.customer_add_more,
+		c.customer_phone,
+		c.customer_idx
 		FROM
 		cart_item ci
 		JOIN
 		cart ca ON ci.cart_idx = ca.cart_idx
 		JOIN
-		customer c ON ca.customer_idx = c.customer_idx
+		customer c
+		ON ca.customer_idx = c.customer_idx
 		WHERE
-		c.customer_idx = #{customerIdx};
+		c.customer_idx =
+		#{customerIdx};
 	</select>
 
 </mapper>

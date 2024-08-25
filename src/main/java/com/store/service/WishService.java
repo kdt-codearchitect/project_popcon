@@ -25,5 +25,7 @@ public interface WishService {
 	WishItemEntity addToWish(WishItemDTO wishItemDTO);
 	List<WishItemDTO> findAll();
 	
+	void deleteByWishIdxAndSkuIdx(int wishIdx, int skuIdx);
+	
 
 }
