@@ -3,6 +3,8 @@ package com.store.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.store.dto.CartItemDTO;
 import com.store.dto.CheckOutDTO;
 import com.store.mapper.CheckOutMapper;
 
@@ -24,7 +26,9 @@ public class CheckOutServiceImpl implements CheckOutService {
 
     // 장바구니 불러오기
     @Override
-    public List<CheckOutDTO> findCart(int customerIdx) {
-        return checkOutMapper.findCart(customerIdx);
+    public List<CartItemDTO> findCart(int customerIdx, List<Integer> skuIdxList) {
+        return checkOutMapper.findCart(customerIdx, skuIdxList);
     }
+    
+    
 }

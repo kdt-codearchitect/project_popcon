@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.store.dto.CartDTO;
+import com.store.dto.CartItemDTO;
 import com.store.dto.CheckOutDTO;
 import com.store.dto.SkuDTO;
 
@@ -17,6 +18,6 @@ import com.store.dto.SkuDTO;
 public interface CheckOutMapper {
 	
 	 List<CheckOutDTO> findCustomer(int customerIdx);
-	 List<CheckOutDTO> findCart(int customerIdx);
+	 List<CartItemDTO> findCart(@Param("customerIdx") int customerIdx, @Param("skuIdxList") List<Integer> skuIdxList);
 }
 

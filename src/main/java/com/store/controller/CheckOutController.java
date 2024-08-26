@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.store.dto.CartDTO;
+import com.store.dto.CartItemDTO;
 import com.store.dto.CheckOutDTO;
 import com.store.dto.SkuDTO;
 import com.store.service.CartService;
@@ -51,13 +52,11 @@ public class CheckOutController {
 	        return checkOutService.findCustomer(customerIdx);
 	    }
 	    
-	    //장바구니 불러오기
+	    // 장바구니 불러오기
 	    @GetMapping("/findCart/{customerIdx}")
-	    public List<CheckOutDTO> findCart(@PathVariable int customerIdx) {
-	    	List<CheckOutDTO>xx=checkOutService.findCart(customerIdx);
-
-	    	System.out.println(xx);
-	        return xx;
+	    public List<CartItemDTO> findCart(@PathVariable int customerIdx, @RequestParam(required = false) List<Integer> skuIdxList) {
+	        List<CartItemDTO> cartItems = checkOutService.findCart(customerIdx, skuIdxList);
+	        return cartItems;
 	    }
 	 
 
