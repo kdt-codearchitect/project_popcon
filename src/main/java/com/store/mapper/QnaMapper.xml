@@ -34,7 +34,7 @@
  				   q.qna_state,
                    m.qna_ans,
                    m.qna_clear_date
-			  from CUSTOMER_QNA q
+			  from customer_qna q
 	    right join customer c on c.customer_idx = q.customer_idx
          left join manager_qna m on m.qna_idx = q.qna_idx
         right join faq_type f on f.faqtype_idx = q.faqtype_idx
@@ -44,7 +44,7 @@
   	
   	<insert id="postMyQna" parameterType="QnaDTO">
   		
-	  insert into CUSTOMER_QNA(
+	  insert into customer_qna(
 	  			  qna_title,
 	  			  faqtype_idx,
 	  			  qna_text)
@@ -55,7 +55,7 @@
   	</insert>
   	<update id="editMyQna" parameterType="QnaDTO">
   	
-  	       update CUSTOMER_QNA(
+  	       update customer_qna(
   	 		  set qna_title = #{qna_title},
   	 		  	  faqtype_idx = #{faqtype_idx},
   	 			  qna_text = #{qna_text})
@@ -63,7 +63,7 @@
   	</update>
   	<delete id="deleteMyQna" parameterType="long">
   	
-  	 delete from CUSTOMER_QNA
+  	 delete from customer_qna
   	       
   	</delete>
   
