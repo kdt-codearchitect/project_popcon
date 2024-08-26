@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,6 +69,12 @@ public class CustomerController {
       Map<String, Boolean> response = new HashMap<>();
       response.put("isUnique", isUnique);
       return ResponseEntity.ok(response);
+    }
+    @PostMapping("/edit")
+    public ResponseEntity<?> editMem(@RequestBody Customer mem) {
+    	log.info("mem:{}",mem);
+    	mem = memService.updateCustomer(mem.getCustomerIdx(), mem).get();
+    	return ResponseEntity.ok(mem);
     }
     
 }

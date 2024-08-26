@@ -2,10 +2,12 @@ package com.store.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.store.dto.CustomerDTO;
@@ -24,10 +26,12 @@ import com.store.repository.KeepRepository;
 
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @AllArgsConstructor
 @Transactional 
+@Slf4j
 public class MemServiceImpl implements MemService {
 
 
@@ -137,5 +141,30 @@ public class MemServiceImpl implements MemService {
                 .customerRole(savedCustomer.getCustomerRole())
                 .build();
     }
+
+	@Override
+	public Optional<Customer> updateCustomer(int customerIdx, Customer updatedCustomer) {
+		Optional<Customer> customerOptional = customerRepository.findById(customerIdx);
+
+        if (customerOptional.isPresent()) {
+            Customer customer = customerOptional.get();
+            // 업데이트할 필드들 설정
+            
+            
+            customer.setCustomerPhone(updatedCustomer.getCustomerPhone());
+            customer.setCustomerAdd(updatedCustomer.getCustomerAdd());
+            customer.setCustomerAddMore(updatedCustomer.getCustomerAddMore());
+            customer.setCustomerEmail(updatedCustomer.getCustomerEmail());
+            
+        	String ecrptPW = new BCryptPasswordEncoder().encode(updatedCustomer.getCustomerPw());
+        	customer.setCustomerPw(ecrptPW);
+    	
+
+            return Optional.of(customerRepository.save(customer));
+        } else {
+            return Optional.empty();
+        }
+
+	}
 }
 
