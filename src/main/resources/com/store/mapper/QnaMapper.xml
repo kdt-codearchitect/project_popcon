@@ -19,7 +19,7 @@
 		
 	</resultMap>
 
-	<select id="findMyQna" resultMap="S2C">
+	<select id="findMyQna" resultMap="S2C" parameterType="int">
 		select qna_idx,
 		faqtype_idx,
 		customer_idx,
@@ -28,7 +28,6 @@
 		qna_picture,
 		qna_image,
 		qna_state,
-		
 		qna_date,
 		qna_del,
 		
