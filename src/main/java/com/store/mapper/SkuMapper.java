@@ -20,5 +20,9 @@ public interface SkuMapper {
 //	@Select("SELECT * FROM member")
     List<SkuDTO> findAll(int limit, String wishIdx);
     List<SkuDTO> findByType(int skutypeIdx, int limit, String wishIdx);
+    List<SkuDTO> findAllOnePlus(int limit, String wishIdx);
+    List<SkuDTO> findByTypeOnePlus(int skutypeIdx, int limit, String wishIdx);
+    List<SkuDTO> findAllTwoPlus(int limit, String wishIdx);
+    List<SkuDTO> findByTypeTwoPlus(int skutypeIdx, int limit, String wishIdx);
 }
 

@@ -50,5 +50,103 @@
         LIMIT #{limit}, 12;
 	]]>
 	</select>
+	
+	<select id="findAllOnePlus" parameterType="map" resultType="Sku">
+		SELECT
+			s.sku_idx AS skuIdx,
+			s.skutype_idx AS skuTypeIdx,
+			s.sku_name AS skuName,
+			s.sku_cost AS skuCost,
+			s.sku_barcode AS skuBarcode,
+			p.promotion_idx as promotionIdx,
+	        w.sku_idx as favorite
+		FROM sku AS s
+		INNER JOIN 
+			sku_promotion AS p
+			ON s.sku_idx = p.sku_idx
+		LEFT OUTER JOIN 
+		    (SELECT sku_idx from wish_item where wish_idx = #{wishIdx}) AS w 
+		    ON s.sku_idx = w.sku_idx
+		WHERE
+			p.promotion_idx = 1
+		ORDER BY w.sku_idx DESC
+		LIMIT #{limit}, 12;
+	</select>
+	
+	<select id="findByTypeOnePlus" parameterType="map" resultType="Sku">
+		<![CDATA[
+			SELECT
+				s.sku_idx AS skuIdx,
+				s.skutype_idx AS skuTypeIdx,
+				s.sku_name AS skuName,
+				s.sku_cost AS skuCost,
+				s.sku_barcode AS skuBarcode,
+				p.promotion_idx as promotionIdx,
+		        w.sku_idx as favorite
+			FROM sku AS s
+			INNER JOIN 
+				sku_promotion AS p
+				ON s.sku_idx = p.sku_idx
+			LEFT OUTER JOIN 
+			    (SELECT sku_idx from wish_item where wish_idx = #{wishIdx}) AS w 
+			    ON s.sku_idx = w.sku_idx
+			WHERE
+				s.skutype_idx >= #{skutypeIdx}
+			AND s.skutype_idx < #{skutypeIdx} + 1000
+			AND p.promotion_idx = 1
+			ORDER BY w.sku_idx DESC
+			LIMIT #{limit}, 12;
+		]]>
+	</select>
+	
+	<select id="findAllTwoPlus" parameterType="map" resultType="Sku">
+		SELECT
+			s.sku_idx AS skuIdx,
+			s.skutype_idx AS skuTypeIdx,
+			s.sku_name AS skuName,
+			s.sku_cost AS skuCost,
+			s.sku_barcode AS skuBarcode,
+			p.promotion_idx as promotionIdx,
+	        w.sku_idx as favorite
+		FROM sku AS s
+		INNER JOIN 
+			sku_promotion AS p
+			ON s.sku_idx = p.sku_idx
+		LEFT OUTER JOIN 
+		    (SELECT sku_idx from wish_item where wish_idx = #{wishIdx}) AS w 
+		    ON s.sku_idx = w.sku_idx
+		WHERE
+			p.promotion_idx = 2
+		ORDER BY w.sku_idx DESC
+		LIMIT #{limit}, 12;
+	</select>
+	
+	<select id="findByTypeTwoPlus" parameterType="map" resultType="Sku">
+		<![CDATA[
+			SELECT
+				s.sku_idx AS skuIdx,
+				s.skutype_idx AS skuTypeIdx,
+				s.sku_name AS skuName,
+				s.sku_cost AS skuCost,
+				s.sku_barcode AS skuBarcode,
+				p.promotion_idx as promotionIdx,
+		        w.sku_idx as favorite
+			FROM sku AS s
+			INNER JOIN 
+				sku_promotion AS p
+				ON s.sku_idx = p.sku_idx
+			LEFT OUTER JOIN 
+			    (SELECT sku_idx from wish_item where wish_idx = #{wishIdx}) AS w 
+			    ON s.sku_idx = w.sku_idx
+			WHERE
+				s.skutype_idx >= #{skutypeIdx}
+			AND s.skutype_idx < #{skutypeIdx} + 1000
+			AND p.promotion_idx = 2
+			ORDER BY w.sku_idx DESC
+			LIMIT #{limit}, 12;
+		]]>
+	</select>
+	
+	
 
 </mapper>

@@ -53,7 +53,8 @@ public class SkuController {
 	public SkuController(SkuService skuService) {
 		this.skuService = skuService;
 	}
-
+	
+	//제품 전체 조회
 	@GetMapping("/sku/{limit}/{wishIdx}")
 	public List<SkuDTO> listSku(@PathVariable int limit, @PathVariable String wishIdx) {
 		List<SkuDTO> list = skuService.findAll(limit, wishIdx);
@@ -61,10 +62,41 @@ public class SkuController {
 		return list;
 	}
 
+	//제품 카테고리별 조회
 	@GetMapping("/sku/type/{skutypeIdx}/{limit}/{wishIdx}")
 	public List<SkuDTO> findByType(@PathVariable int skutypeIdx, @PathVariable int limit, @PathVariable String wishIdx) {
 		List<SkuDTO> list = skuService.findByType(skutypeIdx, limit, wishIdx);
 		return skuService.findByType(skutypeIdx, limit, wishIdx);
+	}
+	
+	// 1+1 제품 전체 조회
+	@GetMapping("/sku/oneplus/{limit}/{wishIdx}")
+	public List<SkuDTO> listSkuOnePlus(@PathVariable int limit, @PathVariable String wishIdx) {
+		List<SkuDTO> list = skuService.findAllOnePlus(limit, wishIdx);
+		System.out.println(skuService.findAllOnePlus(limit, wishIdx));
+		return list;
+	}
+
+	// 1+1제품 카테고리별 조회
+	@GetMapping("/sku/oneplus/type/{skutypeIdx}/{limit}/{wishIdx}")
+	public List<SkuDTO> findByTypeOnePlus(@PathVariable int skutypeIdx, @PathVariable int limit, @PathVariable String wishIdx) {
+		List<SkuDTO> list = skuService.findByTypeOnePlus(skutypeIdx, limit, wishIdx);
+		return skuService.findByTypeOnePlus(skutypeIdx, limit, wishIdx);
+	}
+	
+	// 2+1 제품 전체 조회
+	@GetMapping("/sku/twoplus/{limit}/{wishIdx}")
+	public List<SkuDTO> listSkuTwoPlus(@PathVariable int limit, @PathVariable String wishIdx) {
+		List<SkuDTO> list = skuService.findAllTwoPlus(limit, wishIdx);
+		System.out.println(skuService.findAllTwoPlus(limit, wishIdx));
+		return list;
+	}
+
+	// 2+1제품 카테고리별 조회
+	@GetMapping("/sku/twoplus/type/{skutypeIdx}/{limit}/{wishIdx}")
+	public List<SkuDTO> findByTypeTwoPlus(@PathVariable int skutypeIdx, @PathVariable int limit, @PathVariable String wishIdx) {
+		List<SkuDTO> list = skuService.findByTypeTwoPlus(skutypeIdx, limit, wishIdx);
+		return skuService.findByTypeTwoPlus(skutypeIdx, limit, wishIdx);
 	}
 
 	@PostMapping("/sku/addToCart")
