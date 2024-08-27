@@ -36,7 +36,7 @@
                    m.qna_ans,
                    m.qna_clear_date,
                    m.qna_stated
-			  from CUSTOMER_QNA q
+			  from customer_qna q
 	    right join customer c on c.customer_idx = q.customer_idx
          left join manager_qna m on m.qna_idx = q.qna_idx
         right join faq_type f on f.faqtype_idx = q.faqtype_idx 
@@ -62,7 +62,7 @@
 		  	select customer_idx,
 		  		   customer_id,
 		  		   customer_role
-			  from CUSTOMER
+			  from customer
  			 where customer_role=1
  			   and customer_id=#{customer_id};
   	</select>
