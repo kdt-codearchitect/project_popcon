@@ -1,7 +1,5 @@
 package com.store.dto;
 
-import java.math.BigDecimal;
-
 import com.store.entity.CartItemEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +19,9 @@ public class CartItemDTO {
     private Integer skuCost;
     private Integer keepCost;  // Keep에서 넘어온 상품의 가격
     private Integer finalCost;
-    private String source;  
+    private String source;
+    private int promotionIdx;
+    
     public static CartItemDTO of(CartItemEntity itemEntity) {
         if (itemEntity == null) {
             return null;
