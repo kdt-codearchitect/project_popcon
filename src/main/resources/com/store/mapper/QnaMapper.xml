@@ -16,7 +16,7 @@
 		
 		<result property="qnaDate" column="qna_date" />
 		<result property="qnaDel" column="qna_del" />
-		<result property="qnaAns" column="qna_ans" />
+		
 	</resultMap>
 
 	<select id="findMyQna" resultMap="S2C">
@@ -33,7 +33,7 @@
 		qna_del,
 		
 		from customer_qna
-		where qna_del=false
+		where qna_del=0
 		and customer_idx=#{customer_idx}
 	</select>
 	
