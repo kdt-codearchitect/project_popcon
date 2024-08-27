@@ -13,7 +13,7 @@
 		<result property="qnaPicture" column="qna_picture" />
 		<result property="qnaImage" column="qna_image" />
 		<result property="qnaState" column="qna_state" />
-		<result property="qnaClearDate" column="qna_clear_date" />
+		
 		<result property="qnaDate" column="qna_date" />
 		<result property="qnaDel" column="qna_del" />
 		<result property="qnaAns" column="qna_ans" />
@@ -28,7 +28,7 @@
 		qna_picture,
 		qna_image,
 		qna_state,
-		qna_clear_date,
+		
 		qna_date,
 		qna_del,
 		qna_ans
