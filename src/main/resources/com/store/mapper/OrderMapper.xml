@@ -3,44 +3,55 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.store.mapper.OrderMapper">
 
-    <!-- 주문 생성 -->
-    <insert id="insertOrder" parameterType="OrderDTO">
+	<!-- 주문 생성 -->
+	<insert id="insertOrder" parameterType="OrderDTO">
 
-        INSERT INTO `order` (delivery_idx, customer_idx, order_status_idx, cart_idx, order_time, payment_id)
-        VALUES (#{deliveryIdx}, #{customerIdx}, #{orderStatusIdx}, #{cartIdx}, #{orderTime},  #{paymentId})
+		INSERT INTO `order` (delivery_idx, customer_idx, order_status_idx,
+		cart_idx, order_time, payment_id)
+		VALUES (#{deliveryIdx}, #{customerIdx}, #{orderStatusIdx}, #{cartIdx},
+		#{orderTime}, #{paymentId})
 
-        <selectKey keyProperty="orderIdx" order="AFTER" resultType="int">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-    </insert>
+		<selectKey keyProperty="orderIdx" order="AFTER"
+			resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 
-    <!-- 특정 주문 조회 -->
-    <select id="selectOrderById" resultType="OrderDTO">
-        SELECT * FROM `order` WHERE order_idx = #{orderIdx}
-    </select>
-    
-    <!-- 주문 조회 -->
-	<select id="findOrderByCustomerId" parameterType="int" resultType="OrderDTO">
-	    SELECT 
-	        o.order_idx AS orderIdx,
-	        o.payment_id AS paymentId, 
-	        o.order_time AS orderTime, 
-	        os.order_status AS orderStatus, 
-	        d.delivery_status AS deliveryStatus,
-	        (SELECT SUM(oi.order_item_qty * oi.order_item_price)
-	         FROM order_item oi
-	         WHERE oi.order_idx = o.order_idx) AS totalSumPrice
-	    FROM 
-	        `order` o
-	    JOIN 
-	        `delivery` d ON o.delivery_idx = d.delivery_idx
-	    JOIN 
-	        `order_status` os ON o.order_status_idx = os.order_status_idx
-	    WHERE 
-	        o.customer_idx = #{customerIdx}
-	    ORDER BY 
-	        o.order_time DESC
+	<!-- 특정 주문 조회 -->
+	<select id="selectOrderById" resultType="OrderDTO">
+		SELECT * FROM `order` WHERE order_idx = #{orderIdx}
 	</select>
 
-    
+	<!-- 주문 조회 -->
+	<select id="findOrderByCustomerId" parameterType="int" resultType="OrderDTO">
+		SELECT
+		o.order_idx AS orderIdx,
+		o.payment_id AS paymentId,
+		o.order_time AS orderTime,
+		os.order_status AS orderStatus,
+		d.delivery_status AS deliveryStatus,
+		(SELECT SUM(oi.order_item_qty * oi.order_item_price)
+		FROM order_item oi
+		WHERE oi.order_idx = o.order_idx) AS totalSumPrice,
+		(SELECT s.sku_name
+		FROM sku s
+		JOIN order_item oi ON s.sku_idx = oi.sku_idx
+		WHERE oi.order_idx = o.order_idx
+		ORDER BY oi.order_item_idx ASC
+		LIMIT 1) AS skuName
+		FROM
+		`order` o
+		JOIN
+		`delivery` d ON o.delivery_idx = d.delivery_idx
+		JOIN
+		`order_status` os ON o.order_status_idx = os.order_status_idx
+		WHERE
+		o.customer_idx = #{customerIdx}
+		ORDER BY
+		o.order_time DESC
+
+
+	</select>
+
+
 </mapper>
