@@ -31,7 +31,7 @@
 		
 		qna_date,
 		qna_del,
-		qna_ans
+		
 		from customer_qna
 		where qna_del=false
 		and customer_idx=#{customer_idx}
