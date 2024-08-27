@@ -39,4 +39,30 @@ public class SkuServiceImpl implements SkuService {
 		return skuMapper.findByType(skutypeIdx, limit, wishIdx);
 	}
 
+	
+	@Override
+	public List<SkuDTO> findAllOnePlus(int limit, String wishIdx) {
+		return skuMapper.findAllOnePlus(limit, wishIdx);
+	}
+	
+	@Override
+	public List<SkuDTO> findByTypeOnePlus(int skutypeIdx, int limit, String wishIdx) {
+		// TODO Auto-generated method stub
+		return skuMapper.findByTypeOnePlus(skutypeIdx, limit, wishIdx);
+	}
+	
+	
+	@Override
+	public List<SkuDTO> findAllTwoPlus(int limit, String wishIdx) {
+		return skuMapper.findAllTwoPlus(limit, wishIdx);
+	}
+	
+	@Override
+	public List<SkuDTO> findByTypeTwoPlus(int skutypeIdx, int limit, String wishIdx) {
+		// TODO Auto-generated method stub
+		return skuMapper.findByTypeTwoPlus(skutypeIdx, limit, wishIdx);
+	}
+	
+
+
 }
