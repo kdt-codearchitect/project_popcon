@@ -29,8 +29,7 @@
 		qna_image,
 		qna_state,
 		qna_date,
-		qna_del,
-		
+		qna_del
 		from customer_qna
 		where qna_del=0
 		and customer_idx=#{customer_idx}
