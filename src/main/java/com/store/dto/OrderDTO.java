@@ -30,5 +30,6 @@ public class OrderDTO {
     private String orderStatus;
     private String deliveryStatus;
     private int totalSumPrice;
+    private String skuName;
     
 }
