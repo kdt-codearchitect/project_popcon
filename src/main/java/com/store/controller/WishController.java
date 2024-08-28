@@ -57,29 +57,34 @@ public class WishController {
 	        this.wishItemRepository = wishItemRepository;
 	        this.cartItemRepository = cartItemRepository;
 	    }
+	 
     @GetMapping("/wish/items")
     public ResponseEntity<List<WishItemDTO>> findAll() {
         return ResponseEntity.ok(wishService.findAll());        
     }
-
+    //즐겨찾기 보이게 하기
     @GetMapping("/wish/{customerIdx}")
     public ResponseEntity<List<WishDTO>>getWishesByCustomerIdx(@PathVariable int customerIdx){
     	return ResponseEntity.ok(wishService.getWishesByCustomerIdx(customerIdx));
     }
+    //즐겨찾기 추가
 	@PostMapping("/wish/add/{wishIdx}")
     public ResponseEntity<WishItemDTO> addToWish(@RequestBody WishItemDTO wishItemDto) {
         WishItemEntity wishItemEntity = wishService.addToWish(wishItemDto);
         return ResponseEntity.ok(WishItemDTO.of(wishItemEntity));
     }
+	//wish 테이블 생성
 	@PostMapping("/create")
 	public ResponseEntity<WishDTO> createWish(@RequestBody WishDTO wishDTO){
 		return ResponseEntity.ok(wishService.createWish(wishDTO));
 	}
+	//즐겨찾기 제거
     @DeleteMapping("/wish/delete/{wishItemIdx}")
     public ResponseEntity<Void> deleteWishItem(@PathVariable int wishItemIdx) {
         wishService.deleteWishItem(wishItemIdx);
         return ResponseEntity.noContent().build();
     }
+    //즐겨찾기에 담긴것을 카트에 담김
     @PostMapping("/wish/moveToCart")
     public ResponseEntity<String> moveWishToCart(@RequestParam int wishItemIdx, @RequestParam int cartIdx) {
         try {
@@ -89,7 +94,7 @@ public class WishController {
             return ResponseEntity.status(500).body("Error moving product to cart: " + e.getMessage());
         }
     }
-    
+    //sku에서 즐겨찾기 지우기
     @DeleteMapping("/wish/delete/{wishIdx}/{skuIdx}")
     public ResponseEntity<Void> deleteByWishIdxAndSkuIdx(@PathVariable int wishIdx, @PathVariable int skuIdx) {
         wishService.deleteByWishIdxAndSkuIdx(wishIdx, skuIdx);
