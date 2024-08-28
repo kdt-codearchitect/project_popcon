@@ -19,7 +19,6 @@
 	<select id="findAll" resultType="com.store.dto.WishDTO">
 		SELECT
 		w.wish_item_idx AS wishItemIdx,
-		w.customer_idx AS customerIdx,
 		w.sku_idx AS skuIdx,
 		s.sku_name AS skuName,
 		s.sku_cost AS skuCost

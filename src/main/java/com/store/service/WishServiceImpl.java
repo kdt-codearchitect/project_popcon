@@ -135,6 +135,7 @@ public class WishServiceImpl implements WishService {
                 .cart(cartEntity)
                 .skuIdx(wishItem.getSkuIdx())
                 .skuValue(1)  // 기본 수량을 1로 설정, 필요시 수정 가능
+                .source("SKU")
                 .build();
         
         cartItemRepository.save(cartItem);
